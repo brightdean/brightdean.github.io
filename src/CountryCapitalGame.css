@@ -1,0 +1,42 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.game-button {
+    padding: 1em 3em;
+    font-weight: bold;
+    font-size: large;
+    letter-spacing: 0.1em;
+}
+
+.game-button.selected {
+    background-color: #8abae2;
+    border-color: #598fbb;
+}
+
+.game-button.wrong {
+    background-color: rgb(255, 170, 170);
+    border-color: red;
+}
+
+.counter {
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+@media(max-width: 768px) {
+    .grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
