@@ -21,7 +21,7 @@ function App() {
     {status === 1 ? 
     <>
       <h1>~~ Today's Pairs ~~</h1>
-      {/* <Timer setStatus={setStatus} pairs={pairs.current}/> */}
+      <Timer setStatus={setStatus} pairs={pairs.current}/>
       <CountryCapitalGame data={countryCapitals} pairs={pairs.current} setStatus={setStatus}/>
     </> : status === 0 ?
     <>
