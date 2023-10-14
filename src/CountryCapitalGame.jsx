@@ -1,16 +1,24 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './CountryCapitalGame.css'
 
 const CountryCapitalGame = ({ data }) => {
 
     const selected = useRef([])
 
+    const [pairs, setPairs] = useState(8);
+
     const shuffleData = () => {
         let array = []
+        let pairCounter = 0;
         Object.keys(data).map((key) => {
-            array.push({ text: key, match: data[key] })
-            array.push({ text: data[key], match: key })
+            if (pairCounter < pairs) {
+                array.push({ text: key, match: data[key] })
+                array.push({ text: data[key], match: key })
+                pairCounter++
+            }
+
         })
+
 
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -22,7 +30,9 @@ const CountryCapitalGame = ({ data }) => {
     const [gameData, setGameData] = useState(shuffleData)
     const [matches, setMatches] = useState(0)
 
-
+    useEffect(() => {
+        setGameData(shuffleData)
+    }, [pairs])
 
     const handleButtonClick = (text, match) => {
 
@@ -78,13 +88,29 @@ const CountryCapitalGame = ({ data }) => {
         )
     }
 
+    const PairButton = ({ count }) => {
+        return (
+            <button
+                className='pair-button'
+                onClick={() => setPairs(count)}>
+                {count}
+            </button>
+        )
+    }
+
     return (
         <main className='game'>
+            <section className='pairs'>
+                <PairButton count={8} />
+                <PairButton count={16} />
+                <PairButton count={24} />
+                <PairButton count={32} />
+            </section>
             <span className='counter'>Total Matches: {matches}</span>
             <div className='grid'>
                 {
                     gameData.map((d, i) => {
-                        return <GameButton key={i} text={d.text} match={d.match} />
+                        return <GameButton key={i} text={d.text.replace('_', ' ')} match={d.match.replace('_', ' ')} />
                     })
                 }
             </div>
