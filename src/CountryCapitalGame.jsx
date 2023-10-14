@@ -5,9 +5,9 @@ const CountryCapitalGame = ({ data }) => {
 
     const selected = useRef([])
 
-    const [pairs, setPairs] = useState(8);
+    //const [pairs, setPairs] = useState(8);
 
-    const shuffleData = () => {
+    const shuffleData = (pairs = 8) => {
         let array = []
         let pairCounter = 0;
         Object.keys(data).map((key) => {
@@ -30,9 +30,9 @@ const CountryCapitalGame = ({ data }) => {
     const [gameData, setGameData] = useState(shuffleData)
     const [matches, setMatches] = useState(0)
 
-    useEffect(() => {
-        setGameData(shuffleData)
-    }, [pairs])
+    // useEffect(() => {
+    //     setGameData(shuffleData)
+    // }, [pairs])
 
     const handleButtonClick = (text, match) => {
 
@@ -88,24 +88,43 @@ const CountryCapitalGame = ({ data }) => {
         )
     }
 
-    const PairButton = ({ count }) => {
+    const PairsWrapper = () => {
+
+        const pairButtonCounts = [8, 16, 24, 32]
+
+        function handleButtonClick(count) {
+
+        }
+
+        const PairButton = ({ count }) => {
+            return (
+                <button
+                    id={count}
+                    className='pair-button'
+                    onClick={() => {
+                        handleButtonClick(count);
+                        setGameData(shuffleData(count))
+                    }}>
+                    {count}
+                </button>
+            )
+        }
+
         return (
-            <button
-                className='pair-button'
-                onClick={() => setPairs(count)}>
-                {count}
-            </button>
+
+            <section className='pairs'>
+                {pairButtonCounts.map((count, i) => {
+                    return <PairButton key={i} count={count} />
+                })}
+            </section>
         )
     }
 
+
+
     return (
         <main className='game'>
-            <section className='pairs'>
-                <PairButton count={8} />
-                <PairButton count={16} />
-                <PairButton count={24} />
-                <PairButton count={32} />
-            </section>
+            <PairsWrapper />
             <span className='counter'>Total Matches: {matches}</span>
             <div className='grid'>
                 {
