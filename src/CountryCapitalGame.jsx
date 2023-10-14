@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import './CountryCapitalGame.css'
 
-const CountryCapitalGame = ({ data }) => {
+const CountryCapitalGame = ({ data, pairs, setStatus}) => {
 
     const selected = useRef([])
 
-    //const [pairs, setPairs] = useState(8);
 
-    const shuffleData = (pairs = 8) => {
+    const shuffleData = () => {
         let array = []
         let pairCounter = 0;
         Object.keys(data).map((key) => {
@@ -30,9 +29,11 @@ const CountryCapitalGame = ({ data }) => {
     const [gameData, setGameData] = useState(shuffleData)
     const [matches, setMatches] = useState(0)
 
-    // useEffect(() => {
-    //     setGameData(shuffleData)
-    // }, [pairs])
+
+    
+    useEffect(() => {
+        if(matches === pairs) setStatus(2)
+    }, [matches])
 
     const handleButtonClick = (text, match) => {
 
@@ -88,43 +89,14 @@ const CountryCapitalGame = ({ data }) => {
         )
     }
 
-    const PairsWrapper = () => {
-
-        const pairButtonCounts = [8, 16, 24, 32]
-
-        function handleButtonClick(count) {
-
-        }
-
-        const PairButton = ({ count }) => {
-            return (
-                <button
-                    id={count}
-                    className='pair-button'
-                    onClick={() => {
-                        handleButtonClick(count);
-                        setGameData(shuffleData(count))
-                    }}>
-                    {count}
-                </button>
-            )
-        }
-
-        return (
-
-            <section className='pairs'>
-                {pairButtonCounts.map((count, i) => {
-                    return <PairButton key={i} count={count} />
-                })}
-            </section>
-        )
+    function handlePairCountChange(count){
+        setGameData(shuffleData(count));
     }
-
-
 
     return (
         <main className='game'>
-            <PairsWrapper />
+            {/* <PairCountSelector handlePairCountChange={handlePairCountChange}/> */}
+            {/* <PairsWrapper key={"pair-wrapper"}/> */}
             <span className='counter'>Total Matches: {matches}</span>
             <div className='grid'>
                 {

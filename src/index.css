@@ -25,6 +25,13 @@ a:hover {
 }
 
 body {
+  background: radial-gradient(
+    rgba(156, 152, 152, 0.2) 8%,
+    transparent 8%
+  );
+  background-position: 0% 0%;
+  background-size: 5vmin 5vmin;
+  height: 100%;
   margin: 0;
   display: flex;
   place-items: start;
@@ -45,7 +52,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -53,12 +60,6 @@ button {
 button:hover {
   border-color: #598fbb;
 }
-
-/* 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -71,6 +72,15 @@ button:focus-visible {
   }
 
   button {
-    background-color: #f9f9f9;
+    background-color: white;
   }
+}
+
+p {
+  font-size: large;
+  font-weight: 500;
+}
+
+.start-button {
+  margin-top: 40px;
 }

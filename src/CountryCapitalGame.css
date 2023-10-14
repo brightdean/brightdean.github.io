@@ -1,3 +1,5 @@
+
+
 .game {
     display: flex;
     flex-direction: column;
@@ -36,6 +38,14 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
+@media screen and (min-width: 769px) and (max-width: 1400px){
+    .grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 @media(max-width: 768px) {
     .grid {
         display: grid;
@@ -44,10 +54,13 @@
     }
 }
 
+
+
 .pairs {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 20px
 }
 
